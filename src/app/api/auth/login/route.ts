@@ -34,7 +34,6 @@ export async function POST(req: Request) {
 			return NextResponse.json({ error: errorMessage }, { status: 404 });
 		}
 
-		console.log(data);
 		// Comparar la contraseña ingresada con el hash almacenado
 		const isPasswordValid = await bcrypt.compare(
 			data.password,
@@ -45,6 +44,7 @@ export async function POST(req: Request) {
 				'INVALID_CREDENTIALS',
 				language
 			);
+
 			return NextResponse.json({ error: errorMessage }, { status: 401 });
 		}
 
