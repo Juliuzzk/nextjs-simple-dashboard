@@ -35,15 +35,9 @@ export async function POST(req: Request) {
 		}
 
 		// Comparar la contraseña ingresada con el hash almacenado
-		const isPasswordValid = await bcrypt.compare(
-			data.password,
-			user.password
-		);
+		const isPasswordValid = await bcrypt.compare(data.password, user.password);
 		if (!isPasswordValid) {
-			const errorMessage = await getMessage(
-				'INVALID_CREDENTIALS',
-				language
-			);
+			const errorMessage = await getMessage('INVALID_CREDENTIALS', language);
 
 			return NextResponse.json({ error: errorMessage }, { status: 401 });
 		}

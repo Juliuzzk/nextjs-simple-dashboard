@@ -32,10 +32,7 @@ export async function POST(req: Request) {
 		// Verificar si el usuario ya existe
 		const userCheck = await query(selectUserSQL, [data.email]);
 		if (userCheck.rows.length > 0) {
-			const errorMessage = await getMessage(
-				'USER_ALREADY_EXISTS',
-				language
-			);
+			const errorMessage = await getMessage('USER_ALREADY_EXISTS', language);
 			return NextResponse.json({ error: errorMessage }, { status: 400 });
 		}
 
@@ -55,10 +52,7 @@ export async function POST(req: Request) {
 		if (error instanceof z.ZodError) {
 			const errors = await Promise.all(
 				error.errors.map(async (err) => {
-					const translatedMessage = await getMessage(
-						err.message,
-						language
-					);
+					const translatedMessage = await getMessage(err.message, language);
 					return {
 						path: err.path,
 						message: translatedMessage || err.message,
@@ -68,10 +62,7 @@ export async function POST(req: Request) {
 			return NextResponse.json({ errors }, { status: 400 });
 		}
 
-		const errorMessage = await getMessage(
-			'INTERNAL_SERVER_ERROR',
-			language
-		);
+		const errorMessage = await getMessage('INTERNAL_SERVER_ERROR', language);
 		return NextResponse.json({ error: errorMessage }, { status: 500 });
 	}
 }
