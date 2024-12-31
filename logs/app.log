@@ -1,0 +1,33 @@
+[INFO] 2024-12-31 20:26:23 - Esto es una prueba
+[INFO] 2024-12-31 20:27:18 - Esto es una prueba
+[ERROR] 2024-12-31 20:27:18 - Read more at https://errors.authjs.dev#credentialssignin
+[INFO] 2024-12-31 20:30:41 - Esto es una prueba
+[ERROR] 2024-12-31 20:30:41 - Read more at https://errors.authjs.dev#credentialssignin
+[INFO] 2024-12-31 20:31:04 - Esto es una prueba
+[ERROR] 2024-12-31 20:31:04 - Read more at https://errors.authjs.dev#credentialssignin
+[INFO] 2024-12-31 20:31:18 - Esto es una prueba
+[ERROR] 2024-12-31 20:31:18 - CredentialsSignin: Read more at https://errors.authjs.dev#credentialssignin
+    at Module.callback (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/actions/callback/index.js:246:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AuthInternal (webpack-internal:///(action-browser)/./node_modules/@auth/core/lib/index.js:70:24)
+    at async Auth (webpack-internal:///(action-browser)/./node_modules/@auth/core/index.js:130:34)
+    at async signIn (webpack-internal:///(action-browser)/./node_modules/next-auth/lib/actions.js:53:17)
+    at async SignInCredentials (webpack-internal:///(action-browser)/./src/lib/auth-action.ts:22:21)
+    at async /Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:157:2088
+    at async handleAction (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:156:21940)
+    at async renderToHTMLOrFlightImpl (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:161:22192)
+    at async doRender (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/base-server.js:1565:34)
+    at async responseGenerator (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/base-server.js:1813:28)
+    at async DevServer.renderToResponseWithComponentsImpl (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/base-server.js:1823:28)
+    at async DevServer.renderPageComponent (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/base-server.js:2250:24)
+    at async DevServer.renderToResponseImpl (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/base-server.js:2288:32)
+    at async DevServer.pipeImpl (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/base-server.js:959:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/next-server.js:281:17)
+    at async DevServer.handleRequestImpl (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/base-server.js:853:17)
+    at async /Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/dev/next-dev-server.js:371:20
+    at async Span.traceAsyncFn (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/trace/trace.js:153:20)
+    at async DevServer.handleRequest (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/dev/next-dev-server.js:368:24)
+    at async invokeRender (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/lib/router-server.js:230:21)
+    at async handleRequest (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/lib/router-server.js:408:24)
+    at async requestHandlerImpl (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/lib/router-server.js:432:13)
+    at async Server.requestListener (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/lib/start-server.js:146:13)
