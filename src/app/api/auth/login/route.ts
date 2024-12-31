@@ -1,6 +1,6 @@
 import { query } from '@/lib/db';
+import { hash, compare } from 'bcryptjs';
 import { loadQuery } from '@/lib/load-query';
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 import { getMessage } from '@/lib/dictionary';
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 		}
 
 		// Comparar la contraseña ingresada con el hash almacenado
-		const isPasswordValid = await bcrypt.compare(data.password, user.password);
+		const isPasswordValid = await compare(data.password, user.password);
 		if (!isPasswordValid) {
 			const errorMessage = await getMessage('INVALID_CREDENTIALS', language);
 

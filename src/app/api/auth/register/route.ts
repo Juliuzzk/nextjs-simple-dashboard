@@ -1,7 +1,7 @@
 import { query } from '@/lib/db';
 import { loadQuery } from '@/lib/load-query';
 import { getLanguage } from '@/lib/get-lenguaje';
-import bcrypt from 'bcrypt';
+import { hash, compare } from 'bcryptjs';
 import { getMessage } from '@/lib/dictionary';
 import { z } from 'zod';
 import { NextResponse } from 'next/server';
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
 		}
 
 		// Hashear la contraseña
-		const hashedPassword = await bcrypt.hash(data.password, 10);
+		const hashedPassword = await hash(data.password, 10);
 
 		// Insertar el usuario en la base de datos
 		await query(insertUserSQL, [data.name, data.email, hashedPassword]);
