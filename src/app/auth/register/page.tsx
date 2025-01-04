@@ -1,6 +1,7 @@
 'use client';
 
 import { LoginForm } from '@/components/Auth';
+import RegisterForm from '@/components/Auth/RegisterForm';
 import { useSession } from '@/hooks/useSession';
 import { useSignIn } from '@/hooks/useSignIn';
 import { useSignOut } from '@/hooks/useSignOut';
@@ -25,13 +26,14 @@ export default function SignIn() {
 		console.log(response);
 	};
 
-	const onLogin = async (
-		provider: string,
-		email?: string,
-		password?: string
-	) => {
-		await login(provider, email, password);
-	};
+	const onLogin = async () =>
+		// provider: string,
+		// email?: string,
+		// password?: string
+		{
+			console.log('Disparo on register');
+			// await login(provider, email, password);
+		};
 
 	// if (session === null) {
 	// 	return (
@@ -42,7 +44,7 @@ export default function SignIn() {
 	// }
 
 	if (!session) {
-		return <LoginForm handleLogin={onLogin} />;
+		return <RegisterForm handleRegister={onLogin} />;
 	}
 
 	return (
