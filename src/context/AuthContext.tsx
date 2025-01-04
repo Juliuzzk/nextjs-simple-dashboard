@@ -13,7 +13,7 @@ import { Session } from 'next-auth';
 interface AuthContextProps {
 	session: Session | null;
 	signIn: (
-		provider: 'github' | 'credentials',
+		provider: string,
 		formData?: { email?: string; password?: string; redirect: boolean }
 	) => Promise<{ success: boolean; message?: string; error?: string }>;
 	signOut: () => Promise<void>;
@@ -48,6 +48,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 				response = await SignInGithub(provider);
 			} else if (provider === 'credentials' && formData) {
 				response = await SignInCredentials('credentials', formData);
+			} else {
+				return {
+					success: false,
+					error: `provider ${provider} not supported`,
+				};
 			}
 
 			const updatedSession = await getSession();

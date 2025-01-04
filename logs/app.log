@@ -31,3 +31,51 @@
     at async handleRequest (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/lib/router-server.js:408:24)
     at async requestHandlerImpl (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/lib/router-server.js:432:13)
     at async Server.requestListener (/Users/Julio/Developments/NextJs/nextjs-dashboard/node_modules/next/dist/server/lib/start-server.js:146:13)
+[WARN] 2025-01-02 01:09:01 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-02 01:10:25 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-02 21:41:09 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-02 21:41:09 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-02 21:41:23 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-02 21:41:23 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-02 21:41:49 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-02 21:41:49 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-02 21:56:11 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-02 21:56:11 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-02 21:56:17 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-02 22:14:14 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-02 22:14:14 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-02 22:14:21 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-02 22:15:16 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-02 22:16:21 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-02 22:19:13 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-02 22:19:13 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-02 22:19:18 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-03 00:42:03 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-03 00:42:03 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-03 00:42:09 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-03 01:18:02 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-04 13:22:37 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:22:37 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:22:49 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-04 13:38:09 - Authenticating user: j.caceres.sanzana@gmail.com
+[ERROR] 2025-01-04 13:38:09 - Error during authentication: Illegal arguments: string, object
+[INFO] 2025-01-04 13:38:17 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-04 13:38:57 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:38:57 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:40:07 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:40:07 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:40:08 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:40:08 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:40:15 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:40:15 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:41:49 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:41:49 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:42:00 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:42:00 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:45:51 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:45:51 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:47:17 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:47:17 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:47:28 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 13:47:29 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-04 13:47:47 - Authenticating user: j.caceres.sanzana2@gmail.com
