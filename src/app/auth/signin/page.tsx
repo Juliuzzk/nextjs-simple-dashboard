@@ -1,28 +1,40 @@
 'use client';
 
 import { LoginForm } from '@/components/Auth';
-import { useSession } from '@/hooks/useSession';
+// import { useSession } from '@/hooks/useSession';
 import { useSignIn } from '@/hooks/useSignIn';
 import { useSignOut } from '@/hooks/useSignOut';
+import { useSession } from 'next-auth/react';
+import { redirect, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-export default function SignIn() {
-	const session = useSession();
+export default function SignInPage() {
+	// const session = useSession();
 	const signIn = useSignIn();
 	const signOut = useSignOut();
 
-	const handleSubmitSignOut = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		signOut();
-	};
+	const { data: session, status } = useSession();
+	const router = useRouter();
+
+	useEffect(() => {
+		console.log(session, status);
+		if (status === 'authenticated') {
+			router.push('/dashboard/home'); // Redirige si el usuario no está autenticado
+		}
+	}, [status, router]);
+
+	if (status !== 'unauthenticated') {
+		return <p>Loading...</p>; // Muestra un estado de carga mientras se verifica
+	}
 
 	const login = async (provider: string, email?: string, password?: string) => {
 		console.log('Intentando login..');
 		const response = await signIn(provider, {
 			email: email,
 			password: password,
-			redirect: false,
+			redirect: true,
 		});
-		console.log(response);
+		// router.push('/dashboard/home');
 	};
 
 	const onLogin = async (
@@ -33,37 +45,11 @@ export default function SignIn() {
 		await login(provider, email, password);
 	};
 
-	// if (session === null) {
-	// 	return (
-	// 		<div className="flex items-center justify-center h-screen">
-	// 			<p>Loading...</p>
-	// 		</div>
-	// 	);
-	// }
-
-	if (!session) {
-		return <LoginForm handleLogin={onLogin} registerRoute={'/auth/register'} />;
-	}
-
 	return (
-		<div className="container mx-auto p-6">
-			<div className="w-full p-4 border rounded-lg shadow-md">
-				<h2 className="flex flex-col items-center space-y-6">Session Info</h2>
-				<pre
-					className="w-full bg-black border border-gray-700 mb-4
-					p-4 rounded-lg text-sm text-white overflow-x-auto"
-				>
-					{JSON.stringify(session, null, 2)}
-				</pre>
-				<form onSubmit={handleSubmitSignOut} className="w-full">
-					<button
-						type="submit"
-						className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
-					>
-						Sign Out
-					</button>
-				</form>
-			</div>
-		</div>
+		<>
+			{status === 'unauthenticated' && (
+				<LoginForm handleLogin={onLogin} registerRoute="/auth/register" />
+			)}
+		</>
 	);
 }

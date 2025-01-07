@@ -1,50 +1,55 @@
 'use client';
 
-import { LoginForm } from '@/components/Auth';
 import RegisterForm from '@/components/Auth/RegisterForm';
 import { useSession } from '@/hooks/useSession';
 import { useSignIn } from '@/hooks/useSignIn';
 import { useSignOut } from '@/hooks/useSignOut';
+import { useApi } from '@/hooks/useApi';
 
-export default function SignIn() {
+export default function RegisterPage() {
 	const session = useSession();
 	const signIn = useSignIn();
 	const signOut = useSignOut();
+	const { callApi, loading, error } = useApi();
 
 	const handleSubmitSignOut = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		signOut();
 	};
 
-	const login = async (provider: string, email?: string, password?: string) => {
-		console.log('Intentando login..');
-		const response = await signIn(provider, {
-			email: email,
-			password: password,
-			redirect: false,
+	const register = async (name: string, email: string, password: string) => {
+		const response = await callApi('/api/auth/register', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ name, email, password }),
 		});
-		console.log(response);
+
+		if (response.success) {
+			console.log('Registro exitoso:', response.data);
+
+			// Opcional: iniciar sesión automáticamente después del registro
+			await signIn('credentials', {
+				email,
+				password,
+				redirect: false,
+			});
+		} else {
+			console.error('Error en el registro:', response.error || 'Unknown error');
+		}
 	};
 
-	const onLogin = async () =>
-		// provider: string,
-		// email?: string,
-		// password?: string
-		{
-			console.log('Disparo on register');
-			// await login(provider, email, password);
-		};
-
-	// if (session === null) {
-	// 	return (
-	// 		<div className="flex items-center justify-center h-screen">
-	// 			<p>Loading...</p>
-	// 		</div>
-	// 	);
-	// }
+	const onRegister = async (name: string, email: string, password: string) => {
+		await register(name, email, password);
+	};
 
 	if (!session) {
-		return <RegisterForm handleRegister={onLogin} />;
+		return (
+			<RegisterForm
+				handleRegister={onRegister}
+				loading={loading}
+				error={error}
+			/>
+		);
 	}
 
 	return (

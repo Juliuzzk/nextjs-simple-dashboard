@@ -81,3 +81,100 @@
 [INFO] 2025-01-04 13:47:47 - Authenticating user: j.caceres.sanzana2@gmail.com
 [INFO] 2025-01-04 14:18:33 - Authenticating user: j.caceres.sanzana2@gmail.com
 [INFO] 2025-01-04 14:27:37 - Authenticating user: j.caceres.sanzana2@gmail.com
+[INFO] 2025-01-04 20:21:05 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-04 20:21:05 - Authentication failed: User not found for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 01:12:44 - Registrando usuario..
+[ERROR] 2025-01-06 01:12:44 - [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "name"
+    ],
+    "message": "Required"
+  }
+]
+[INFO] 2025-01-06 01:17:30 - Registrando usuario..
+[ERROR] 2025-01-06 01:17:30 - [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "name"
+    ],
+    "message": "Required"
+  }
+]
+[INFO] 2025-01-06 01:18:11 - Registrando usuario..
+[ERROR] 2025-01-06 01:18:11 - [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "name"
+    ],
+    "message": "Required"
+  }
+]
+[INFO] 2025-01-06 01:18:52 - Registrando usuario..
+[ERROR] 2025-01-06 01:18:52 - [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "name"
+    ],
+    "message": "Required"
+  }
+]
+[INFO] 2025-01-06 01:19:25 - Registrando usuario..
+[ERROR] 2025-01-06 01:19:25 - Body is unusable: Body has already been read
+[ERROR] 2025-01-06 01:21:48 - [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "name"
+    ],
+    "message": "Required"
+  }
+]
+[ERROR] 2025-01-06 01:22:20 - [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "name"
+    ],
+    "message": "Required"
+  }
+]
+[INFO] 2025-01-06 20:36:23 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 20:46:57 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 20:47:59 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 20:58:31 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-06 20:58:31 - Authentication failed: Invalid password for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 20:58:39 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 20:59:17 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 21:01:01 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 21:01:57 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 21:02:03 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 21:15:26 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 21:28:18 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 21:57:07 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 21:57:36 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 21:59:57 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 22:04:58 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 22:19:07 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 22:19:18 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 22:20:31 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-06 22:20:31 - Authentication failed: Invalid password for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 22:20:36 - Authenticating user: j.caceres.sanzana22@gmail.com
+[WARN] 2025-01-06 22:20:37 - Authentication failed: Invalid password for email j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 22:20:42 - Authenticating user: j.caceres.sanzana22@gmail.com

@@ -49,10 +49,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
 		await handleLogin(provider);
 	};
 
-	const handleRedirect = (route: string) => {
-		router.push(route); // Redirige a una nueva ruta
-	};
-
 	return (
 		<div className="min-h-screen bg-base-200 flex items-center justify-center">
 			<div className="card w-[32rem] bg-base-100 shadow-xl">

@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
-import CustomIconButton from '../common/CustomIconButton';
 import Link from 'next/link';
 
 interface RegisterCredentials {
+	name: string;
 	email: string;
 	password: string;
 	repeatPassword: string;
 }
 
 interface RegisterFormProps {
-	// handleLogin: () => Promise<void>; // Función de login
-	handleRegister: () => Promise<void>; // Función de login
-	// loading: boolean; // Indica si la operación está en curso
-	// error?: string; // Mensaje de error opcional
+	handleRegister: (
+		name: string,
+		email: string,
+		password: string
+	) => Promise<void>; // Función para registrar
+	loading: boolean; // Indica si la operación está en curso
+	error: string | null; // Mensaje de error opcional
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({
-	handleRegister: handleRegister,
+	handleRegister,
+	loading,
+	error,
 }) => {
 	const [credentials, setCredentials] = useState<RegisterCredentials>({
+		name: '',
 		email: '',
 		password: '',
 		repeatPassword: '',
@@ -34,8 +40,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log('Quiero registrarme!!');
-		// await handleRegister();
+		if (credentials.password !== credentials.repeatPassword) {
+			alert('Las contraseñas no coinciden.');
+			return;
+		}
+		await handleRegister(
+			credentials.name,
+			credentials.email,
+			credentials.password
+		);
 	};
 
 	return (
@@ -50,6 +63,20 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 							handleSubmit(e);
 						}}
 					>
+						<div className="form-control w-full">
+							<label className="label">
+								<span className="label-text">Nombre</span>
+							</label>
+							<input
+								type="text"
+								name="name"
+								placeholder=""
+								className="input input-bordered w-full"
+								value={credentials.name}
+								onChange={handleChange}
+								required
+							/>
+						</div>
 						<div className="form-control w-full">
 							<label className="label">
 								<span className="label-text">Email</span>
@@ -85,7 +112,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 								<span className="label-text">Repetir Contraseña</span>
 							</label>
 							<input
-								type="repeatPassword"
+								type="password"
 								name="repeatPassword"
 								placeholder="********"
 								className="input input-bordered w-full"
@@ -95,19 +122,25 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 							/>
 						</div>
 
+						{error && (
+							<div className="alert alert-error mt-4">
+								<span>{error}</span>
+							</div>
+						)}
+
 						<div className="form-control mt-6">
-							<button type="submit" className="btn btn-primary">
-								Registrar
+							<button
+								type="submit"
+								className={`btn btn-primary ${loading ? 'loading' : ''}`}
+								disabled={loading}
+							>
+								{loading ? 'Registrando...' : 'Registrar'}
 							</button>
 						</div>
 
 						<div className="divider">O</div>
 						<div className="form-control mt-6">
-							<Link
-								href={'/auth/signin'}
-								type="submit"
-								className="btn btn-outline"
-							>
+							<Link href={'/auth/signin'} className="btn btn-outline">
 								Volver
 							</Link>
 						</div>

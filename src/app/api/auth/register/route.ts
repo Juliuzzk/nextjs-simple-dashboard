@@ -5,6 +5,7 @@ import { hash, compare } from 'bcryptjs';
 import { getMessage } from '@/lib/dictionary';
 import { z } from 'zod';
 import { NextResponse } from 'next/server';
+import logger from '@/utils/logger';
 
 const registerSchema = z.object({
 	name: z.string().min(1, { message: 'VALIDATION_STRING_MIN_NAME' }), // Código del diccionario
@@ -45,6 +46,7 @@ export async function POST(req: Request) {
 		const successMessage = await getMessage('REGISTER_SUCCESS', language);
 		return NextResponse.json({ message: successMessage }, { status: 201 });
 	} catch (error) {
+		logger.error(error);
 		// Determinar el idioma dinámicamente
 		const language = getLanguage(req.headers); // Idioma por defecto: "es"
 

@@ -23,7 +23,6 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 // Proveedor del contexto
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-	// const [session, setSession] = useState<any>(null);
 	const [session, setSession] = useState<Session | null>(null);
 
 	// Cargar la sesión inicial
