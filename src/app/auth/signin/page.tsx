@@ -1,40 +1,29 @@
 'use client';
 
 import { LoginForm } from '@/components/Auth';
-// import { useSession } from '@/hooks/useSession';
+import { CustomLoader } from '@/components/shared/Loader';
+import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession';
 import { useSignIn } from '@/hooks/useSignIn';
-import { useSignOut } from '@/hooks/useSignOut';
-import { useSession } from 'next-auth/react';
-import { redirect, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SignInPage() {
-	// const session = useSession();
-	const signIn = useSignIn();
-	const signOut = useSignOut();
-
-	const { data: session, status } = useSession();
+	const { session, status } = useAuthenticatedSession();
 	const router = useRouter();
 
-	useEffect(() => {
-		console.log(session, status);
-		if (status === 'authenticated') {
-			router.push('/dashboard/home'); // Redirige si el usuario no está autenticado
-		}
-	}, [status, router]);
+	const signIn = useSignIn();
 
-	if (status !== 'unauthenticated') {
-		return <p>Loading...</p>; // Muestra un estado de carga mientras se verifica
+	if (status === 'loading') {
+		console.log('loading: ', status);
+		return <CustomLoader />;
 	}
 
 	const login = async (provider: string, email?: string, password?: string) => {
-		console.log('Intentando login..');
+		console.log('Intentando login...');
 		const response = await signIn(provider, {
 			email: email,
 			password: password,
-			redirect: true,
+			redirect: false, // Manejar la redirección manualmente
 		});
-		// router.push('/dashboard/home');
 	};
 
 	const onLogin = async (
@@ -43,6 +32,7 @@ export default function SignInPage() {
 		password?: string
 	) => {
 		await login(provider, email, password);
+		//TODO: si resp viene con error debemos realizar algo..
 	};
 
 	return (

@@ -8,7 +8,7 @@ import { signOut } from 'next-auth/react';
 import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession'; // Importa el hook personalizado
 import { CustomLoader } from '@/components/shared/Loader';
 
-export default function RootLayout({
+export default function DashboardLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
@@ -27,6 +27,8 @@ export default function RootLayout({
 			console.error('Error during sign out:', error);
 		}
 	};
+
+	//TODO:check if this loading page is util here..
 
 	// Mostrar un estado de carga mientras se valida la sesión
 	if (status === 'loading') {

@@ -7,8 +7,10 @@ export const useAuthenticatedSession = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		if (status === 'unauthenticated') {
-			router.push('/auth/signin');
+		console.log('status: ', status);
+		if (status === 'authenticated') {
+			console.log('no entro nunca al if..');
+			router.push('/dashboard/home');
 		}
 	}, [status, router]);
 

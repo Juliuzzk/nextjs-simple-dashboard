@@ -5,14 +5,15 @@ interface RegisterCredentials {
 	name: string;
 	email: string;
 	password: string;
-	repeatPassword: string;
+	confirmPassword: string;
 }
 
 interface RegisterFormProps {
 	handleRegister: (
 		name: string,
 		email: string,
-		password: string
+		password: string,
+		confirmPassword: string
 	) => Promise<void>; // Función para registrar
 	loading: boolean; // Indica si la operación está en curso
 	error: string | null; // Mensaje de error opcional
@@ -27,7 +28,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 		name: '',
 		email: '',
 		password: '',
-		repeatPassword: '',
+		confirmPassword: '',
 	});
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -40,14 +41,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (credentials.password !== credentials.repeatPassword) {
-			alert('Las contraseñas no coinciden.');
-			return;
-		}
+		// if (credentials.password !== credentials.repeatPassword) {
+		// 	alert('Las contraseñas no coinciden.');
+		// 	return;
+		// }
 		await handleRegister(
 			credentials.name,
 			credentials.email,
-			credentials.password
+			credentials.password,
+			credentials.confirmPassword
 		);
 	};
 
@@ -113,10 +115,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 							</label>
 							<input
 								type="password"
-								name="repeatPassword"
+								name="confirmPassword"
 								placeholder="********"
 								className="input input-bordered w-full"
-								value={credentials.repeatPassword}
+								value={credentials.confirmPassword}
 								onChange={handleChange}
 								required
 							/>

@@ -178,3 +178,404 @@
 [INFO] 2025-01-06 22:20:36 - Authenticating user: j.caceres.sanzana22@gmail.com
 [WARN] 2025-01-06 22:20:37 - Authentication failed: Invalid password for email j.caceres.sanzana22@gmail.com
 [INFO] 2025-01-06 22:20:42 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 22:57:58 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-06 23:19:57 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-07 00:33:20 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-07 00:48:16 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-07 00:48:44 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-07 00:48:51 - Authenticating user: j.caceres.sanzana22@gmail.com
+[INFO] 2025-01-08 18:33:30 - Authenticating user: j.caceres.sanzana22@gmail.com
+[ERROR] 2025-01-08 19:07:38 - [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "VALIDATION_INVALID_EMAIL",
+    "path": [
+      "email"
+    ]
+  }
+]
+[INFO] 2025-01-08 19:23:34 - Authenticating user: testing@test7.cl
+[ERROR] 2025-01-08 19:26:16 - [
+  {
+    "code": "too_small",
+    "minimum": 6,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "VALIDATION_STRING_MIN_PASSWORD",
+    "path": [
+      "password"
+    ]
+  }
+]
+[INFO] 2025-01-08 19:30:11 - Authenticating user: test@test1.cl
+[ERROR] 2025-01-08 19:30:30 - [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "VALIDATION_INVALID_EMAIL",
+    "path": [
+      "email"
+    ]
+  }
+]
+[ERROR] 2025-01-08 19:44:14 - [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "VALIDATION_INVALID_EMAIL",
+    "path": [
+      "email"
+    ]
+  }
+]
+[ERROR] 2025-01-08 19:44:21 - [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "VALIDATION_INVALID_EMAIL",
+    "path": [
+      "email"
+    ]
+  }
+]
+[ERROR] 2025-01-08 19:45:22 - [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "VALIDATION_INVALID_EMAIL",
+    "path": [
+      "email"
+    ]
+  }
+]
+[ERROR] 2025-01-08 19:45:37 - [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "VALIDATION_INVALID_EMAIL",
+    "path": [
+      "email"
+    ]
+  }
+]
+[ERROR] 2025-01-08 19:46:47 - [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "VALIDATION_INVALID_EMAIL",
+    "path": [
+      "email"
+    ]
+  }
+]
+[ERROR] 2025-01-08 19:46:56 - [
+  {
+    "validation": "email",
+    "code": "invalid_string",
+    "message": "VALIDATION_INVALID_EMAIL",
+    "path": [
+      "email"
+    ]
+  }
+]
+[INFO] 2025-01-08 19:48:00 - Authenticating user: test@test2.cl
+[ERROR] 2025-01-08 19:51:57 - [
+  {
+    "code": "too_small",
+    "minimum": 8,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "Password must be more than 8 characters",
+    "path": [
+      "password"
+    ]
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Confirm password is required"
+  }
+]
+[ERROR] 2025-01-08 19:53:07 - api/auth/register/route.ts [
+  {
+    "code": "too_small",
+    "minimum": 8,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "Password must be more than 8 characters",
+    "path": [
+      "password"
+    ]
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Confirm password is required"
+  }
+]
+[ERROR] 2025-01-08 19:53:52 - api/auth/register/route.ts [
+  {
+    "code": "too_small",
+    "minimum": 8,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "Password must be more than 8 characters",
+    "path": [
+      "password"
+    ]
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Confirm password is required"
+  }
+]
+[ERROR] 2025-01-08 19:53:52 - api/auth/login/route.ts Validation errors occurred
+[ERROR] 2025-01-08 19:54:44 - api/auth/register/route.ts [
+  {
+    "code": "too_small",
+    "minimum": 8,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "Password must be more than 8 characters",
+    "path": [
+      "password"
+    ]
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Confirm password is required"
+  }
+]
+[ERROR] 2025-01-08 19:54:44 - api/auth/login/route.ts Validation errors occurred
+[ERROR] 2025-01-08 19:57:46 - api/auth/register/route.ts [
+  {
+    "code": "too_small",
+    "minimum": 8,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "Password must be more than 8 characters",
+    "path": [
+      "password"
+    ]
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Confirm password is required"
+  }
+]
+[ERROR] 2025-01-08 19:57:46 - api/auth/login/route.ts
+[ERROR] 2025-01-08 19:58:12 - api/auth/register/route.ts [
+  {
+    "code": "too_small",
+    "minimum": 8,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "Password must be more than 8 characters",
+    "path": [
+      "password"
+    ]
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Confirm password is required"
+  }
+]
+[ERROR] 2025-01-08 19:58:12 - api/auth/login/route.ts
+[ERROR] 2025-01-08 20:00:48 - api/auth/register/route.ts [
+  {
+    "code": "too_small",
+    "minimum": 8,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "Password must be more than 8 characters",
+    "path": [
+      "password"
+    ]
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Confirm password is required"
+  }
+]
+[ERROR] 2025-01-08 20:00:48 - api/auth/login/route.ts
+[ERROR] 2025-01-08 20:02:00 - api/auth/register/route.ts [
+  {
+    "code": "too_small",
+    "minimum": 8,
+    "type": "string",
+    "inclusive": true,
+    "exact": false,
+    "message": "Password must be more than 8 characters",
+    "path": [
+      "password"
+    ]
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "Confirm password is required"
+  }
+]
+[ERROR] 2025-01-08 20:02:00 - api/auth/login/route.ts
+[ERROR] 2025-01-08 22:27:14 - api/auth/register/route.ts [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD"
+  }
+]
+[ERROR] 2025-01-08 22:27:14 - api/auth/register/route.ts
+[ERROR] 2025-01-08 22:27:31 - api/auth/register/route.ts [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD"
+  }
+]
+[ERROR] 2025-01-08 22:27:31 - api/auth/register/route.ts
+[ERROR] 2025-01-08 22:27:40 - api/auth/register/route.ts [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD"
+  }
+]
+[ERROR] 2025-01-08 22:27:40 - api/auth/register/route.ts
+[INFO] 2025-01-08 22:28:16 - /api/auth/register/route.ts
+[ERROR] 2025-01-08 22:28:16 - api/auth/register/route.ts [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD"
+  }
+]
+[ERROR] 2025-01-08 22:28:16 - api/auth/register/route.ts
+[INFO] 2025-01-08 22:28:42 - /api/auth/register/route.ts
+[ERROR] 2025-01-08 22:28:42 - api/auth/register/route.ts [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD"
+  }
+]
+[ERROR] 2025-01-08 22:28:42 - api/auth/register/route.ts
+[INFO] 2025-01-08 22:28:46 - /api/auth/register/route.ts
+[ERROR] 2025-01-08 22:28:46 - api/auth/register/route.ts [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD"
+  }
+]
+[ERROR] 2025-01-08 22:28:46 - api/auth/register/route.ts
+[INFO] 2025-01-08 22:32:37 - /api/auth/register/route.ts
+[ERROR] 2025-01-08 22:32:37 - api/auth/register/route.ts [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD"
+  }
+]
+[ERROR] 2025-01-08 22:32:37 - api/auth/register/route.ts
+[INFO] 2025-01-08 22:33:01 - /api/auth/register/route.ts
+[ERROR] 2025-01-08 22:33:01 - api/auth/register/route.ts [
+  {
+    "code": "custom",
+    "path": [
+      "confirmPassword"
+    ],
+    "message": "VALIDATION_PASSWORDS_DO_NOT_MATCH"
+  }
+]
+[ERROR] 2025-01-08 22:33:01 - api/auth/register/route.ts
+[INFO] 2025-01-08 22:33:04 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:33:08 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:33:18 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:33:18 - Authenticating user: test@test9.cl
+[INFO] 2025-01-08 22:39:59 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:40:33 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:40:34 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:41:19 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:43:05 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:43:15 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:43:27 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:43:31 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:43:50 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:44:01 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:44:04 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:44:15 - /api/auth/register/route.ts
+[INFO] 2025-01-08 22:47:47 - Authenticating user: j.caceres.sanzana22@gmail.com
