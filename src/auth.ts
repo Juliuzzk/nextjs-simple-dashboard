@@ -10,11 +10,15 @@ const selectUserSQL = loadQuery(
 	'src/app/api/auth/login/queries/LoginSelectUser.sql'
 );
 
+const selectUserAccessSQL = loadQuery(
+	'src/app/api/auth/login/queries/LoginSelectUserAccess.sql'
+);
+
 async function authenticateUser(email: string, password: string) {
 	try {
 		// Fetch user from the database
 		const { rows } = await query(selectUserSQL, [email]);
-		const user = rows[0];
+		let user = rows[0];
 
 		if (!user) {
 			logger.warn(`Authentication failed: User not found for email ${email}`);
@@ -28,6 +32,10 @@ async function authenticateUser(email: string, password: string) {
 			return null;
 		}
 
+		const resultRoles = await query(selectUserAccessSQL, [user.id]);
+		const roles = resultRoles.rows;
+
+		user.roles = roles;
 		// Return user object if authentication is successful
 		return user;
 	} catch (error) {
@@ -64,9 +72,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			},
 		}),
 	],
-	// callbacks: {
-	// 	async redirect() {
-	// 		return '/dashboard';
-	// 	},
-	// },
+	callbacks: {
+		async jwt({ token, user }) {
+			// console.log('jwt: ');
+			// console.log(user);
+			if (user) {
+				token.id = user.id; // Agrega el ID del usuario
+				token.email = user.email; // Agrega el email del usuario
+				token.roles = user.roles;
+			}
+			return token;
+		},
+		async session({ session, token }) {
+			session.user = {
+				id: token.id as string,
+				email: token.email as string,
+				emailVerified: token.emailVerified
+					? new Date(token.emailVerified as string)
+					: null,
+			};
+			return session;
+		},
+	},
+	secret: process.env.NEXTAUTH_SECRET,
 });
