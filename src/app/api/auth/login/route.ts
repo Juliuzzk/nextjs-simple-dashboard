@@ -1,51 +1,61 @@
-import { authOptions } from '@/auth';
+import { query } from '@/lib/db';
+import { compare } from 'bcryptjs';
+import { loadQuery } from '@/lib/load-query';
+import jwt from 'jsonwebtoken'; // Usa el mismo paquete para firmar tokens
 import { NextResponse } from 'next/server';
 
+const selectUserSQL = loadQuery(
+	'src/app/api/auth/login/queries/LoginSelectUser.sql'
+);
+const selectUserAccessSQL = loadQuery(
+	'src/app/api/auth/login/queries/LoginSelectUserAccess.sql'
+);
+
 export async function POST(req: Request) {
-	const body = await req.json();
-	const { email, password } = body;
-
-	const credentialsProvider = authOptions.providers.find(
-		(provider) => provider.id === 'credentials'
-	);
-
-	if (!credentialsProvider || !credentialsProvider.authorize) {
-		return NextResponse.json(
-			{ error: 'Credentials provider not configured' },
-			{ status: 500 }
-		);
-	}
-
 	try {
-		// Llama a la función `authorize` directamente
-		const user = await credentialsProvider.authorize({ email, password });
+		const body = await req.json();
+		const { email, password } = body;
 
+		// Buscar al usuario en la base de datos
+		const resultUser = await query(selectUserSQL, [email]);
+		const user = resultUser.rows[0];
 		if (!user) {
+			return NextResponse.json({ error: 'User not found' }, { status: 404 });
+		}
+
+		// Validar la contraseña
+		const isPasswordValid = await compare(password, user.password);
+		if (!isPasswordValid) {
 			return NextResponse.json(
 				{ error: 'Invalid credentials' },
 				{ status: 401 }
 			);
 		}
 
-		// Generar token JWT compatible
+		// Buscar roles
+		const resultRoles = await query(selectUserAccessSQL, [user.id]);
+
+		// Generar el token utilizando la misma estructura que NextAuth
 		const token = jwt.sign(
 			{
 				id: user.id,
 				email: user.email,
-				roles: user.roles,
+				name: user.name,
+				roles: resultRoles.rows,
 			},
-			process.env.NEXTAUTH_SECRET as string,
-			{ expiresIn: '1h' }
+			process.env.NEXTAUTH_SECRET as string, // Usa la misma clave que NextAuth
+			{ expiresIn: '1h' } // Mismo tiempo de expiración
 		);
 
+		// Devolver el token al cliente
 		return NextResponse.json({
 			message: 'Login successful',
 			token,
 		});
 	} catch (error) {
-		console.error('Error in login API:', error);
+		console.error('Error en el login:', error);
 		return NextResponse.json(
-			{ error: error.message || 'Internal server error' },
+			{ error: 'Internal Server Error' },
 			{ status: 500 }
 		);
 	}
