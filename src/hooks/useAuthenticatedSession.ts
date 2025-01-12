@@ -10,7 +10,7 @@ export const useAuthenticatedSession = () => {
 		console.log('status: ', status);
 		if (status === 'authenticated') {
 			console.log('no entro nunca al if..');
-			router.push('/dashboard/home');
+			// router.push('/dashboard/home');
 		}
 	}, [status, router]);
 

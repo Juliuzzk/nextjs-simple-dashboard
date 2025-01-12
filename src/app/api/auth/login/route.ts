@@ -3,6 +3,7 @@ import { compare } from 'bcryptjs';
 import { loadQuery } from '@/lib/load-query';
 import jwt from 'jsonwebtoken'; // Usa el mismo paquete para firmar tokens
 import { NextResponse } from 'next/server';
+import { SignJWT } from 'jose';
 
 const selectUserSQL = loadQuery(
 	'src/app/api/auth/login/queries/LoginSelectUser.sql'
@@ -33,20 +34,21 @@ export async function POST(req: Request) {
 		}
 
 		// Buscar roles
-		const resultRoles = await query(selectUserAccessSQL, [user.id]);
+		const resultRoles = await query(selectUserAccessSQL, [user.email]);
 
 		// Generar el token utilizando la misma estructura que NextAuth
-		const token = jwt.sign(
-			{
-				id: user.id,
-				email: user.email,
-				name: user.name,
-				roles: resultRoles.rows,
-			},
-			process.env.NEXTAUTH_SECRET as string, // Usa la misma clave que NextAuth
-			{ expiresIn: '1h' } // Mismo tiempo de expiración
-		);
+		const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET); // Encode the secret
 
+		const token = await new SignJWT({
+			id: user.id,
+			email: user.email,
+			name: user.name,
+			roles: resultRoles.rows,
+		})
+			.setProtectedHeader({ alg: 'HS256' }) // Algorithm to use (HS256 matches your current setup)
+			.setIssuedAt() // Set "iat" (issued at)
+			.setExpirationTime('1h') // Set expiration time (same as `expiresIn`)
+			.sign(secret); // Sign with the encoded secret
 		// Devolver el token al cliente
 		return NextResponse.json({
 			message: 'Login successful',

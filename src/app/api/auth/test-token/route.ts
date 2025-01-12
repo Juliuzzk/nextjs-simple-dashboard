@@ -6,18 +6,37 @@ export async function GET(req: Request) {
 	const authHeader = req.headers.get('Authorization');
 
 	// Validar si existe el encabezado Authorization
-	if (!authHeader || !authHeader.startsWith('Bearer ')) {
+	if (!authHeader) {
 		return NextResponse.json(
 			{ error: 'Unauthorized. No token provided.' },
 			{ status: 401 }
 		);
 	}
 
-	const token = authHeader.split(' ')[1]; // Extraer el token
+	// Extraer el token eliminando el prefijo "Bearer "
+	const token = authHeader.replace('Bearer ', '').trim();
+
+	// Validar si el token está vacío después de eliminar el prefijo
+	if (!token) {
+		return NextResponse.json(
+			{ error: 'Unauthorized. Token is empty.' },
+			{ status: 401 }
+		);
+	}
 
 	try {
 		// Verificar el token usando la clave secreta
-		const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET as string);
+		const secret = process.env.NEXTAUTH_SECRET as string;
+
+		if (!secret) {
+			console.error('Secret key is missing in the environment variables.');
+			return NextResponse.json(
+				{ error: 'Internal server error. Secret key is missing.' },
+				{ status: 500 }
+			);
+		}
+
+		const decoded = jwt.verify(token, secret);
 
 		// Token válido, responder con información decodificada
 		return NextResponse.json(

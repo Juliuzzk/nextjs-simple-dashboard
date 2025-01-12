@@ -18,7 +18,7 @@ async function authenticateUser(email: string, password: string) {
 	try {
 		// Fetch user from the database
 		const { rows } = await query(selectUserSQL, [email]);
-		let user = rows[0];
+		const user = rows[0];
 
 		if (!user) {
 			logger.warn(`Authentication failed: User not found for email ${email}`);
@@ -32,10 +32,6 @@ async function authenticateUser(email: string, password: string) {
 			return null;
 		}
 
-		const resultRoles = await query(selectUserAccessSQL, [user.id]);
-		const roles = resultRoles.rows;
-
-		user.roles = roles;
 		// Return user object if authentication is successful
 		return user;
 	} catch (error) {
@@ -53,10 +49,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [
 		GitHub,
 		Credentials({
-			// credentials: {
-			// 	email: { label: 'Email', type: 'text' },
-			// 	password: { label: 'Password', type: 'password' },
-			// },
 			authorize: async (credentials) => {
 				if (!credentials?.email || !credentials?.password) {
 					logger.warn('Missing email or password in credentials');
@@ -74,12 +66,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	],
 	callbacks: {
 		async jwt({ token, user }) {
-			console.log('jwt: ');
-			console.log(user);
+			// console.log('jwt: ');
+			// console.log('github provider');
+			// console.log(user);
 			if (user) {
-				token.id = user.id; // Agrega el ID del usuario
-				token.email = user.email; // Agrega el email del usuario
-				token.roles = user.roles;
+				console.log('GitHub provider user: ', user);
+
+				try {
+					// Fetch roles from the database
+					const resultRoles = await query(selectUserAccessSQL, [user.email]);
+					// Add properties to the token
+					token.id = user.id;
+					token.email = user.email;
+					token.roles = resultRoles.rows || []; // Default to an empty array if no roles are returned
+				} catch (error) {
+					console.error('Error fetching user roles:', error);
+					token.roles = []; // Ensure token.roles is always defined
+				}
 			}
 			return token;
 		},
