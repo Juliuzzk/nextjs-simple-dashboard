@@ -4,10 +4,13 @@ import { useState } from 'react';
 import { Search, Plus, Filter } from 'lucide-react';
 import { UserTable } from '@/components/Dashboard/users/UserTable';
 import { UserFilters } from '@/components/Dashboard/users/UserFilters';
+import { useApi } from '@/hooks/useApi';
+import { useUsers } from '@/hooks/useUsers';
 
 export default function UsersPage() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
+	const { users, isLoading } = useUsers();
 
 	return (
 		<div className="space-y-6">
@@ -43,7 +46,7 @@ export default function UsersPage() {
 			</div>
 
 			{showFilters && <UserFilters />}
-			<UserTable searchQuery={searchQuery} />
+			<UserTable users={users} searchQuery={searchQuery} />
 		</div>
 	);
 }

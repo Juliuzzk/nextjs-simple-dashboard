@@ -9,6 +9,7 @@ import React, {
 import { SignInGithub, SignInCredentials, SignOut } from '@/lib/auth-action';
 import { getSession } from 'next-auth/react';
 import { Session } from 'next-auth';
+import { createResponse } from '@/utils/response';
 
 interface AuthContextProps {
 	session: Session | null;
@@ -44,25 +45,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 			};
 
 			if (provider === 'github') {
-				response = await SignInGithub(provider);
+				await SignInGithub(provider);
+				// Si llego aqui, todo esta OK
+				// return createResponse(true, { data: res });
 			} else if (provider === 'credentials' && formData) {
 				response = await SignInCredentials('credentials', formData);
 			} else {
-				return {
-					success: false,
+				return createResponse(false, {
 					error: `provider ${provider} not supported`,
-				};
+				});
 			}
-
 			const updatedSession = await getSession();
 			setSession(updatedSession);
 
 			return response;
 		} catch (err) {
-			return {
-				success: false,
-				error: `Something going wrong ${err as string}`,
-			};
+			const error = err instanceof Error ? err.message : 'An unknown error';
+			return createResponse(false, {
+				error: error,
+			});
 		}
 	};
 

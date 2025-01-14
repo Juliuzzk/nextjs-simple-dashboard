@@ -66,12 +66,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	],
 	callbacks: {
 		async jwt({ token, user }) {
-			// console.log('jwt: ');
-			// console.log('github provider');
-			// console.log(user);
 			if (user) {
-				console.log('GitHub provider user: ', user);
-
 				try {
 					// Fetch roles from the database
 					const resultRoles = await query(selectUserAccessSQL, [user.email]);
@@ -95,6 +90,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 					: null,
 			};
 			return session;
+		},
+		async redirect({ url, baseUrl }) {
+			// Redirige al home después del login exitoso
+			return baseUrl + '/dashboard'; // `baseUrl` es la URL base de tu aplicación (por ejemplo, http://localhost:3000)
 		},
 	},
 	secret: process.env.NEXTAUTH_SECRET,

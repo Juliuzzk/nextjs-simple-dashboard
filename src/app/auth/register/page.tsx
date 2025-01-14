@@ -2,23 +2,20 @@
 
 import RegisterForm from '@/components/Auth/RegisterForm';
 import { useSignIn } from '@/hooks/useSignIn';
-import { useSignOut } from '@/hooks/useSignOut';
 import { useApi } from '@/hooks/useApi';
 import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
 	// Usar el hook personalizado para manejar la sesión
-	const { session, status } = useAuthenticatedSession();
+	const { status } = useAuthenticatedSession();
 	const signIn = useSignIn();
-	const signOut = useSignOut();
 	const { callApi, loading, error } = useApi();
+	const [err, setErr] = useState<string | null>(null);
+	const router = useRouter();
 
-	const handleSubmitSignOut = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		signOut();
-	};
-
-	const register = async (
+	const onRegister = async (
 		name: string,
 		email: string,
 		password: string,
@@ -34,24 +31,20 @@ export default function RegisterPage() {
 		if (response.success) {
 			console.log('Registro exitoso:', response.data);
 
-			// Opcional: iniciar sesión automáticamente después del registro
-			await signIn('credentials', {
+			const result = await signIn('credentials', {
 				email,
 				password,
 				redirect: false,
 			});
+			if (result.success) {
+				router.push('/dashboard');
+			} else {
+				setErr(result.error || null);
+			}
 		} else {
 			console.error('Error en el registro:', response.error || 'Unknown error');
+			setErr(response.error || null);
 		}
-	};
-
-	const onRegister = async (
-		name: string,
-		email: string,
-		password: string,
-		confirmPassword: string
-	) => {
-		await register(name, email, password, confirmPassword);
 	};
 
 	return (
@@ -60,7 +53,7 @@ export default function RegisterPage() {
 				<RegisterForm
 					handleRegister={onRegister}
 					loading={loading}
-					error={error}
+					error={err}
 				/>
 			)}
 		</>

@@ -72,7 +72,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 							<input
 								type="text"
 								name="name"
-								placeholder=""
+								placeholder="Ingresa tu nombre"
 								className="input input-bordered w-full"
 								value={credentials.name}
 								onChange={handleChange}
@@ -86,7 +86,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 							<input
 								type="email"
 								name="email"
-								placeholder="correo@ejemplo.com"
+								placeholder="usuario@dominio.com"
 								className="input input-bordered w-full"
 								value={credentials.email}
 								onChange={handleChange}

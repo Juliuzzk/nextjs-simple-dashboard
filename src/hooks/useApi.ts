@@ -12,7 +12,7 @@ export function useApi<T>() {
 	const callApi = async (
 		url: string,
 		options?: RequestInit,
-		errorMode: ErrorHandlingMode = 'single' // Define cómo manejar los errores
+		errorMode: ErrorHandlingMode = 'single'
 	): Promise<Response<T>> => {
 		setLoading(true);
 		setError(null);
@@ -31,12 +31,12 @@ export function useApi<T>() {
 
 			return json;
 		} catch (err: any) {
-			const errorMsg = err.message || 'An unknown error occurred';
-			setError(errorMsg);
-			setErrors([errorMsg]); // Maneja el error de red como un array de un solo elemento
+			const error = err.message || 'An unknown error occurred';
+			setError(error);
+			setErrors([error]);
 			return {
 				success: false,
-				error: errorMsg,
+				error: error,
 			};
 		} finally {
 			setLoading(false);
@@ -45,8 +45,11 @@ export function useApi<T>() {
 
 	// Helper para procesar errores según el modo
 	const processErrors = (response: Response<T>, mode: ErrorHandlingMode) => {
-		if (Array.isArray(response.data)) {
-			const errorMessages = response.data.map((err: any) => err.message);
+		if (response.data && Array.isArray(response.data)) {
+			// Manejo de errores cuando `data` es un array
+			const errorMessages = response.data.map((err: any) =>
+				err.message ? err.message : String(err)
+			);
 			if (mode === 'single') {
 				// Establece solo el primer error en `setError`
 				setError(errorMessages[0]);

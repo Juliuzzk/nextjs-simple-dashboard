@@ -44,7 +44,6 @@ export async function POST(req: Request) {
 
 		// Parsear el cuerpo de la solicitud
 		const body = await req.json();
-		logger.info('/api/auth/register/route.ts', { requestBody: body });
 		const data = registerSchema.parse(body);
 
 		// Verificar si el usuario ya existe

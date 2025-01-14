@@ -1,40 +1,42 @@
 import { MoreHorizontal, ArrowUpDown } from 'lucide-react';
+import Image from 'next/image';
 
 interface User {
-	id: string;
+	id?: string;
 	name: string;
 	email: string;
-	role: string;
-	status: 'active' | 'inactive';
-	lastLogin: string;
+	role?: string;
+	status?: 'active' | 'inactive';
+	lastLogin?: string;
+	image?: string;
+	created_at?: Date;
 }
 
-const mockUsers: User[] = [
-	{
-		id: '1',
-		name: 'John Doe',
-		email: 'john@example.com',
-		role: 'Admin',
-		status: 'active',
-		lastLogin: '2024-02-20 10:30',
-	},
-	{
-		id: '2',
-		name: 'Jane Smith',
-		email: 'jane@example.com',
-		role: 'User',
-		status: 'active',
-		lastLogin: '2024-02-19 15:45',
-	},
-	// Add more mock users as needed
-];
+// const mockUsers: User[] = [
+// 	{
+// 		id: '1',
+// 		name: 'John Doe',
+// 		email: 'john@example.com',
+// 		role: 'Admin',
+// 		status: 'active',
+// 		lastLogin: '2024-02-20 10:30',
+// 	},
+// ];
+
+// interface User {
+// 	name: string;
+// 	email: string;
+// 	image: string;
+// 	created_at: Date;
+// }
 
 interface UserTableProps {
+	users: User[];
 	searchQuery: string;
 }
 
-export function UserTable({ searchQuery }: UserTableProps) {
-	const filteredUsers = mockUsers.filter(
+export function UserTable({ users, searchQuery }: UserTableProps) {
+	const filteredUsers = users.filter(
 		(user) =>
 			user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			user.email.toLowerCase().includes(searchQuery.toLowerCase())
@@ -57,15 +59,15 @@ export function UserTable({ searchQuery }: UserTableProps) {
 							</div>
 						</th>
 						<th>Email</th>
-						<th>Role</th>
+						{/* <th>Role</th> */}
 						<th>Status</th>
 						<th>Last Login</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					{filteredUsers.map((user) => (
-						<tr key={user.id}>
+					{filteredUsers.map((user, index) => (
+						<tr key={index}>
 							<td>
 								<label>
 									<input type="checkbox" className="checkbox" />
@@ -75,9 +77,11 @@ export function UserTable({ searchQuery }: UserTableProps) {
 								<div className="flex items-center gap-3">
 									<div className="avatar">
 										<div className="w-8 h-8 rounded-full">
-											<img
+											<Image
 												src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}`}
 												alt={user.name}
+												width={32}
+												height={32}
 											/>
 										</div>
 									</div>
@@ -85,9 +89,9 @@ export function UserTable({ searchQuery }: UserTableProps) {
 								</div>
 							</td>
 							<td>{user.email}</td>
-							<td>
-								<div className="badge badge-ghost">{user.role}</div>
-							</td>
+							{/* <td> */}
+							{/* 	<div className="badge badge-ghost">{user.role}</div> */}
+							{/* </td> */}
 							<td>
 								<div
 									className={`badge ${user.status === 'active' ? 'badge-success' : 'badge-error'}`}

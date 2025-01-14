@@ -1,9 +1,13 @@
 'use server';
 import { signIn, signOut } from '@/auth';
-import logger from '@/utils/logger';
+import { createResponse } from '@/utils/response';
 
 export const SignInGithub = async (provider?: string) => {
-	return await signIn(provider);
+	const res = await signIn(provider, {
+		redirect: true,
+	});
+
+	return res;
 };
 
 export const SignInCredentials = async (
@@ -11,16 +15,19 @@ export const SignInCredentials = async (
 	formData?: { email?: string; password?: string; redirect?: boolean }
 ) => {
 	try {
+		console.log(formData);
 		const res = await signIn(provider, formData);
-		return {
-			success: true,
+
+		return createResponse(true, {
 			data: res,
-		};
+		});
 	} catch (err) {
-		return {
-			success: false,
-			message: 'Email or password is incorrect.',
-		};
+		const error =
+			err instanceof Error ? err.message : 'An unknown error occurred';
+		console.log('mi error: ', error);
+		return createResponse(false, {
+			error: 'Email or password is incorrect.',
+		});
 	}
 };
 

@@ -17,12 +17,13 @@ interface LoginFormProps {
 	) => Promise<void>; // Función de login
 	registerRoute: string;
 	// loading: boolean; // Indica si la operación está en curso
-	// error?: string; // Mensaje de error opcional
+	error: string | null; // Mensaje de error opcional
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
 	handleLogin,
 	registerRoute,
+	error,
 }) => {
 	const router = useRouter();
 	const [credentials, setCredentials] = useState<LoginCredentials>({
@@ -69,7 +70,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 							<input
 								type="email"
 								name="email"
-								placeholder="correo@ejemplo.com"
+								placeholder="usuario@dominio.com"
 								className="input input-bordered w-full"
 								value={credentials.email}
 								onChange={handleChange}
@@ -96,6 +97,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
 								</a>
 							</label>
 						</div>
+						{error && (
+							<div className="alert alert-error mt-4">
+								<span>{error}</span>
+							</div>
+						)}
 
 						<div className="form-control mt-6">
 							<button type="submit" className="btn btn-primary">

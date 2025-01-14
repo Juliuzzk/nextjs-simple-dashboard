@@ -2,44 +2,57 @@
 
 import { LoginForm } from '@/components/Auth';
 import { CustomLoader } from '@/components/shared/Loader';
-import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession';
 import { useSignIn } from '@/hooks/useSignIn';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function SignInPage() {
-	const { session, status } = useAuthenticatedSession();
+	const [error, setError] = useState<string | null>(null);
 	const router = useRouter();
-
 	const signIn = useSignIn();
+	const [loader, setLoader] = useState(false);
+	const { data: session, status } = useSession();
 
-	if (status === 'loading') {
-		console.log('loading: ', status);
+	// Redirige automáticamente si el usuario está autenticado
+	useEffect(() => {
+		if (status === 'authenticated') {
+			router.push('/dashboard/home');
+			// setLoader(false);
+		}
+	}, [status, router]);
+
+	// Muestra el loader mientras verifica el estado de la sesión o redirige
+	if (status === 'loading' || status === 'authenticated' || loader === true) {
 		return <CustomLoader />;
 	}
-
-	const login = async (provider: string, email?: string, password?: string) => {
-		console.log('Intentando login...');
-		const response = await signIn(provider, {
-			email: email,
-			password: password,
-			redirect: false, // Manejar la redirección manualmente
-		});
-	};
 
 	const onLogin = async (
 		provider: string,
 		email?: string,
 		password?: string
 	) => {
-		await login(provider, email, password);
-		//TODO: si resp viene con error debemos realizar algo..
+		setLoader(true);
+		setError(null);
+		console.log('Intentando login...');
+		const response = await signIn(provider, {
+			email: email,
+			password: password,
+			redirect: false, // Manejar la redirección manualmente
+		});
+
+		if (provider === 'credentials') {
+			if (!response.success) {
+				setError(response.error || null); // Manejar errores
+			}
+		}
 	};
 
 	return (
-		<>
-			{status === 'unauthenticated' && (
-				<LoginForm handleLogin={onLogin} registerRoute="/auth/register" />
-			)}
-		</>
+		<LoginForm
+			handleLogin={onLogin}
+			registerRoute="/auth/register"
+			error={error}
+		/>
 	);
 }
