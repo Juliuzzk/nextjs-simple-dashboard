@@ -22,7 +22,8 @@ export default function UsersPage() {
 				</button>
 			</div>
 
-			<div className="flex gap-4 items-center">
+			{/* <div className="flex gap-4 items-center"> */}
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 				<div className="flex-1 relative">
 					<Search
 						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-base-content/60"

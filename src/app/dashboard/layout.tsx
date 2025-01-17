@@ -3,10 +3,11 @@
 import '../globals.css';
 import { Sidebar } from '@/components/Dashboard/Sidebar';
 import { TopNav } from '@/components/Dashboard/TopNav';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { signOut } from 'next-auth/react';
 import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession'; // Importa el hook personalizado
 import { CustomLoader } from '@/components/shared/Loader';
+import { themeChange } from 'theme-change';
 
 export default function DashboardLayout({
 	children,
@@ -27,6 +28,9 @@ export default function DashboardLayout({
 			console.error('Error during sign out:', error);
 		}
 	};
+	useEffect(() => {
+		themeChange(); // `false` para desactivar el logging en consola
+	}, []);
 
 	//TODO:check if this loading page is util here..
 

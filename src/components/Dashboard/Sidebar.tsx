@@ -8,11 +8,12 @@ import {
 } from 'lucide-react';
 import { SidebarItem } from './SidebarItem';
 
+//TODO: menuItems debe cargarse a partir de opciones del menu configuradas
 const menuItems = [
 	{ icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
 	{ icon: Users, label: 'Users', href: '/dashboard/users' },
-	{ icon: ShoppingCart, label: 'Products', href: '/products' },
-	{ icon: Settings, label: 'Settings', href: '/settings' },
+	// { icon: ShoppingCart, label: 'Products', href: '/products' },
+	// { icon: Settings, label: 'Settings', href: '/settings' },
 	{ icon: HelpCircle, label: 'Help', href: '/help' },
 ];
 
