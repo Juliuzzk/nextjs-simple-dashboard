@@ -1,11 +1,11 @@
 'use client';
 
-import RegisterForm from '@/components/Auth/RegisterForm';
 import { useSignIn } from '@/hooks/useSignIn';
 import { useApi } from '@/hooks/useApi';
 import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import RegisterForm from '@/components/Auth/RegisterForm/RegisterForm';
 
 export default function RegisterPage() {
 	// Usar el hook personalizado para manejar la sesión

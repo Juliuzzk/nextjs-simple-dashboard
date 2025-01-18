@@ -1,13 +1,13 @@
 'use client';
 
 import '../globals.css';
-import { Sidebar } from '@/components/Dashboard/Sidebar';
-import { TopNav } from '@/components/Dashboard/TopNav';
+import { TopNav } from '@/components/Dashboard/navigation/navbar/TopNav';
 import { useEffect, useState } from 'react';
 import { signOut } from 'next-auth/react';
 import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession'; // Importa el hook personalizado
 import { CustomLoader } from '@/components/shared/Loader';
 import { themeChange } from 'theme-change';
+import { Sidebar } from '@/components/Dashboard/navigation/sidebar/Sidebar';
 
 export default function DashboardLayout({
 	children,
