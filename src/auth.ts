@@ -1,5 +1,5 @@
-import { loadQuery } from '@/lib/load-query';
-import { query } from '@/lib/db';
+import { loadQuery } from '@/lib/database/load-query';
+import { query } from '@/lib/database/db';
 import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 import Credentials from 'next-auth/providers/credentials';

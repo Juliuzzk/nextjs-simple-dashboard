@@ -1,5 +1,5 @@
-import { query } from '@/lib/db';
-import { loadQuery } from '@/lib/load-query';
+import { query } from '@/lib/database/db';
+import { loadQuery } from '@/lib/database/load-query';
 import { createResponse } from '@/utils/response';
 import { NextResponse } from 'next/server';
 

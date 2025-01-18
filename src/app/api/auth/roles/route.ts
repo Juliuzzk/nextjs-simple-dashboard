@@ -1,9 +1,9 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/database/db';
 import { hash, compare } from 'bcryptjs';
-import { loadQuery } from '@/lib/load-query';
+import { loadQuery } from '@/lib/database/load-query';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
-import { getMessage } from '@/lib/dictionary';
+import { getMessage } from '@/lib/database/dictionary';
 import { getLanguage } from '@/lib/get-lenguaje';
 import { NextResponse } from 'next/server';
 

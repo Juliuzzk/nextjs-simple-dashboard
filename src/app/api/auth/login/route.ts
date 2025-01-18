@@ -1,6 +1,6 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/database/db';
 import { compare } from 'bcryptjs';
-import { loadQuery } from '@/lib/load-query';
+import { loadQuery } from '@/lib/database/load-query';
 import jwt from 'jsonwebtoken'; // Usa el mismo paquete para firmar tokens
 import { NextResponse } from 'next/server';
 import { SignJWT } from 'jose';

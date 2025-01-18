@@ -1,8 +1,8 @@
-import { query } from '@/lib/db';
-import { loadQuery } from '@/lib/load-query';
+import { query } from '@/lib/database/db';
+import { loadQuery } from '@/lib/database/load-query';
 import { getLanguage } from '@/lib/get-lenguaje';
 import { hash } from 'bcryptjs';
-import { getMessage } from '@/lib/dictionary';
+import { getMessage } from '@/lib/database/dictionary';
 import { z } from 'zod';
 import { NextResponse } from 'next/server';
 import logger from '@/utils/logger';

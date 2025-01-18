@@ -1,6 +1,6 @@
-import { ActivityCard } from '@/components/Dashboard/ActivityCard';
-import { ChartCard } from '@/components/Dashboard/ChartCard';
-import { StatCard } from '@/components/Dashboard/StatCard';
+import { ActivityCard } from '@/components/dashboard/home/ActivityCard';
+import { ChartCard } from '@/components/dashboard/home/ChartCard';
+import { StatCard } from '@/components/dashboard/home/StatCard';
 import { CreditCard, ShoppingBag, TrendingUp, Users } from 'lucide-react';
 
 const recentActivities = [

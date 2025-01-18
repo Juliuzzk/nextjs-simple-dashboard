@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Search, Plus, Filter } from 'lucide-react';
-import { UserTable } from '@/components/Dashboard/users/UserTable';
-import { UserFilters } from '@/components/Dashboard/users/UserFilters';
+import { UserTable } from '@/components/dashboard/users/UserTable';
+import { UserFilters } from '@/components/dashboard/users/UserFilters';
 import { useApi } from '@/hooks/useApi';
 import { useUsers } from '@/hooks/useUsers';
 

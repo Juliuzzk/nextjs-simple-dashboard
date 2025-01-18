@@ -1,13 +1,12 @@
 'use client';
 
 import '../globals.css';
-import { TopNav } from '@/components/Dashboard/navigation/navbar/TopNav';
+import { TopNav } from '@/components/dashboard/navigation/navbar/TopNav';
 import { useEffect, useState } from 'react';
 import { signOut } from 'next-auth/react';
 import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession'; // Importa el hook personalizado
 import { CustomLoader } from '@/components/shared/Loader';
-import { themeChange } from 'theme-change';
-import { Sidebar } from '@/components/Dashboard/navigation/sidebar/Sidebar';
+import { Sidebar } from '@/components/dashboard/navigation/sidebar/Sidebar';
 
 export default function DashboardLayout({
 	children,
@@ -15,7 +14,6 @@ export default function DashboardLayout({
 	children: React.ReactNode;
 }>) {
 	const [isCollapsed, setIsCollapsed] = useState(false);
-
 	// Usar el hook personalizado para manejar la sesión
 	const { session, status } = useAuthenticatedSession();
 
@@ -28,9 +26,6 @@ export default function DashboardLayout({
 			console.error('Error during sign out:', error);
 		}
 	};
-	useEffect(() => {
-		themeChange(); // `false` para desactivar el logging en consola
-	}, []);
 
 	//TODO:check if this loading page is util here..
 
@@ -38,7 +33,6 @@ export default function DashboardLayout({
 	if (status === 'loading') {
 		return <CustomLoader />;
 	}
-
 	// Renderizar el layout solo si el usuario está autenticado
 	return (
 		<div className="h-screen flex overflow-hidden">

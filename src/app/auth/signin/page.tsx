@@ -1,6 +1,6 @@
 'use client';
 
-import LoginForm from '@/components/Auth/LoginForm/LoginForm';
+import LoginForm from '@/components/auth/loginform/LoginForm';
 import { CustomLoader } from '@/components/shared/Loader';
 import { useSignIn } from '@/hooks/useSignIn';
 import { useSession } from 'next-auth/react';

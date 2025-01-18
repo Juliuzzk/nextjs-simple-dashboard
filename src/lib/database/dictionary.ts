@@ -1,4 +1,4 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/database/db';
 
 /**
  * Obtiene un mensaje del diccionario basado en código e idioma.
