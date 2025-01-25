@@ -1,13 +1,15 @@
 import { Bell, PanelLeftClose, PanelLeft } from 'lucide-react';
 import { UserMenu } from './UserMenu';
 import { ThemeToggle } from './ThemeToggle';
+import { Session } from 'next-auth';
 
 interface TopNavProps {
 	isCollapsed: boolean;
 	onToggleSidebar: () => void;
+	user: Session['user'];
 }
 
-export function TopNav({ isCollapsed, onToggleSidebar }: TopNavProps) {
+export function TopNav({ isCollapsed, onToggleSidebar, user }: TopNavProps) {
 	return (
 		<div className="navbar bg-base-200 px-4 border-b border-base-300 h-16">
 			<div className="flex-1">
@@ -27,8 +29,7 @@ export function TopNav({ isCollapsed, onToggleSidebar }: TopNavProps) {
 						</span>
 					</div>
 				</button>
-
-				<UserMenu />
+				<UserMenu user={user} />
 			</div>
 		</div>
 	);

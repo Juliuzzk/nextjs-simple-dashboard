@@ -9,15 +9,16 @@ declare module 'next-auth' {
 		roles?: string[];
 	}
 
-	interface JWT {
+	export interface JWT {
 		id?: string;
 		email?: string;
 		roles?: string[];
 	}
 
-	interface Session {
+	export interface Session {
 		user: {
 			id?: string;
+			name?: string;
 			email?: string;
 			roles?: string[];
 		};

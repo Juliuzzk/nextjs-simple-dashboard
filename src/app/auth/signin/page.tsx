@@ -32,9 +32,8 @@ export default function SignInPage() {
 		email?: string,
 		password?: string
 	) => {
-		setLoader(true);
+		// setLoader(true);
 		setError(null);
-		console.log('Intentando login...');
 		const response = await signIn(provider, {
 			email: email,
 			password: password,
@@ -43,6 +42,7 @@ export default function SignInPage() {
 
 		if (provider === 'credentials') {
 			if (!response.success) {
+				// setLoader(false);
 				setError(response.error || null); // Manejar errores
 			}
 		}

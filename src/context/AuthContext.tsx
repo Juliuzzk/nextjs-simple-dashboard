@@ -45,11 +45,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 			};
 
 			if (provider === 'github') {
-				await SignInGithub(provider);
+				response = await SignInGithub(provider);
 				// Si llego aqui, todo esta OK
 				// return createResponse(true, { data: res });
 			} else if (provider === 'credentials' && formData) {
-				response = await SignInCredentials('credentials', formData);
+				response = await SignInCredentials(formData);
 			} else {
 				return createResponse(false, {
 					error: `provider ${provider} not supported`,

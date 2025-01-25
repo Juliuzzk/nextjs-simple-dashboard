@@ -1,12 +1,13 @@
 'use client';
 
-import '../globals.css';
 import { TopNav } from '@/components/dashboard/navigation/navbar/TopNav';
-import { useEffect, useState } from 'react';
-import { signOut } from 'next-auth/react';
-import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession'; // Importa el hook personalizado
-import { CustomLoader } from '@/components/shared/Loader';
 import { Sidebar } from '@/components/dashboard/navigation/sidebar/Sidebar';
+import { CustomLoader } from '@/components/shared/Loader';
+import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession'; // Importa el hook personalizado
+import { signOut } from 'next-auth/react';
+import { useState } from 'react';
+import '../globals.css';
+import { Session } from 'next-auth';
 
 export default function DashboardLayout({
 	children,
@@ -15,7 +16,8 @@ export default function DashboardLayout({
 }>) {
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	// Usar el hook personalizado para manejar la sesión
-	const { session, status } = useAuthenticatedSession();
+	const { status, session } = useAuthenticatedSession();
+	const user = session?.user as Session['user'];
 
 	const onLogout = async () => {
 		try {
@@ -33,6 +35,7 @@ export default function DashboardLayout({
 	if (status === 'loading') {
 		return <CustomLoader />;
 	}
+
 	// Renderizar el layout solo si el usuario está autenticado
 	return (
 		<div className="h-screen flex overflow-hidden">
@@ -41,6 +44,7 @@ export default function DashboardLayout({
 				<TopNav
 					isCollapsed={isCollapsed}
 					onToggleSidebar={() => setIsCollapsed(!isCollapsed)}
+					user={user}
 				/>
 				<main className="flex-1 p-8 bg-base-100 overflow-auto">{children}</main>
 			</div>

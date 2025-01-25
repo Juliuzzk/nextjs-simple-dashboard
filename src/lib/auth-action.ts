@@ -10,13 +10,14 @@ export const SignInGithub = async (provider?: string) => {
 	return res;
 };
 
-export const SignInCredentials = async (
-	provider?: string,
-	formData?: { email?: string; password?: string; redirect?: boolean }
-) => {
+export const SignInCredentials = async (formData?: {
+	email?: string;
+	password?: string;
+	redirect?: boolean;
+}) => {
 	try {
 		console.log(formData);
-		const res = await signIn(provider, formData);
+		const res = await signIn('credentials', formData);
 
 		return createResponse(true, {
 			data: res,

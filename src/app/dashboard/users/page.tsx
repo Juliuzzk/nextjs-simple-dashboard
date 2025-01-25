@@ -1,16 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { Search, Plus, Filter } from 'lucide-react';
-import { UserTable } from '@/components/dashboard/users/UserTable';
 import { UserFilters } from '@/components/dashboard/users/UserFilters';
-import { useApi } from '@/hooks/useApi';
+import { UserTable } from '@/components/dashboard/users/UserTable';
 import { useUsers } from '@/hooks/useUsers';
+import { Filter, Plus, Search } from 'lucide-react';
+import { useState } from 'react';
 
 export default function UsersPage() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
-	const { users, isLoading } = useUsers();
+	const { users } = useUsers();
 
 	return (
 		<div className="space-y-6">
