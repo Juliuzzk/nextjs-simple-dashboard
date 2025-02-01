@@ -3,31 +3,12 @@ import { loadQuery } from '@/lib/database/load-query';
 import { getLanguage } from '@/lib/get-lenguaje';
 import { hash } from 'bcryptjs';
 import { getMessage } from '@/lib/database/dictionary';
-import { z } from 'zod';
 import { NextResponse } from 'next/server';
 import logger from '@/utils/logger';
 import { createResponse } from '@/utils/response';
 import { translateZodErrors } from '@/lib/zod-utils';
-
-// Definición de esquema de validación
-const registerSchema = z
-	.object({
-		name: z.string().min(1, { message: 'VALIDATION_STRING_MIN_NAME' }), // Código del diccionario
-		email: z
-			.string({ required_error: 'VALIDATION_STRING_REQUIRED_EMAIL' })
-			.min(1, { message: 'VALIDATION_STRING_REQUIRED_EMAIL' })
-			.email({ message: 'VALIDATION_INVALID_EMAIL' }), // Código del diccionario
-		password: z
-			.string({ required_error: 'VALIDATION_STRING_REQUIRED_PASSWORD' })
-			.min(6, { message: 'VALIDATION_STRING_MIN_PASSWORD' }), // Código del diccionario
-		confirmPassword: z
-			.string({ required_error: 'VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD' })
-			.min(1, { message: 'VALIDATION_STRING_REQUIRED_CONFIRM_PASSWORD' }),
-	})
-	.refine((data) => data.password === data.confirmPassword, {
-		path: ['confirmPassword'],
-		message: 'VALIDATION_PASSWORDS_DO_NOT_MATCH', // Código del diccionario
-	});
+import { registerSchema } from '@/lib/schema/register-schema';
+import { z } from 'zod';
 
 // Queries SQL
 const selectUserSQL = loadQuery(
@@ -63,7 +44,12 @@ export async function POST(req: Request) {
 		const hashedPassword = await hash(data.password, 10);
 
 		// Insertar el usuario en la base de datos
-		await query(insertUserSQL, [data.name, data.email, hashedPassword]);
+		await query(insertUserSQL, [
+			data.firstName,
+			data.lastName,
+			data.email,
+			hashedPassword,
+		]);
 
 		// Respuesta de éxito
 		const successMessage = await getMessage('REGISTER_SUCCESS', language);

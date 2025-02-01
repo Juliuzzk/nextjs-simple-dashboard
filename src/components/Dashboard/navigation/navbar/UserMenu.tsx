@@ -1,13 +1,12 @@
 import { User, Settings, LogOut } from 'lucide-react';
 import { Session } from 'next-auth';
+import Image from 'next/image';
 
 interface UserMenuProps {
 	user: Session['user'];
 }
 
 export function UserMenu({ user }: UserMenuProps) {
-	console.log('User: ', user);
-
 	return (
 		<div className="dropdown dropdown-end">
 			<div
@@ -27,7 +26,9 @@ export function UserMenu({ user }: UserMenuProps) {
 				className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box min-w-[12rem] w-auto "
 			>
 				<li className="menu-title text-base-content/60">
-					<span>{user.name}</span>
+					<span>
+						{user.firstName} {user.lastName}
+					</span>
 					<span className="text-xs">{user.email}</span>
 				</li>
 				<div className="divider my-0"></div>

@@ -18,7 +18,8 @@ declare module 'next-auth' {
 	export interface Session {
 		user: {
 			id?: string;
-			name?: string;
+			firstName?: string;
+			lastName?: string;
 			email?: string;
 			roles?: string[];
 		};

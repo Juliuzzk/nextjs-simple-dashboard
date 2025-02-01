@@ -16,7 +16,8 @@ export default function RegisterPage() {
 	const router = useRouter();
 
 	const onRegister = async (
-		name: string,
+		firstName: string,
+		lastName: string,
 		email: string,
 		password: string,
 		confirmPassword: string
@@ -25,7 +26,13 @@ export default function RegisterPage() {
 			method: 'POST',
 			//TODO: Definir variable global para manejo de idiomas en diccionario
 			headers: { 'Content-Type': 'application/json', 'Accept-Language': 'es' },
-			body: JSON.stringify({ name, email, password, confirmPassword }),
+			body: JSON.stringify({
+				firstName,
+				lastName,
+				email,
+				password,
+				confirmPassword,
+			}),
 		});
 
 		if (response.success) {

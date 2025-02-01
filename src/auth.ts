@@ -5,6 +5,7 @@ import GitHub from 'next-auth/providers/github';
 import Credentials from 'next-auth/providers/credentials';
 import { compare } from 'bcryptjs';
 import logger from './utils/logger';
+import { kill } from 'process';
 
 const selectUserSQL = loadQuery(
 	'src/app/api/auth/login/queries/LoginSelectUser.sql'
@@ -13,6 +14,48 @@ const selectUserSQL = loadQuery(
 const selectUserAccessSQL = loadQuery(
 	'src/app/api/auth/login/queries/LoginSelectUserAccess.sql'
 );
+
+const insertUserSQL = loadQuery(
+	'src/app/api/auth/register/queries/RegisterInsertUser.sql'
+);
+
+function parseName(fullName: string) {
+	// Normalizar espacios y eliminar excesos
+	const normalized = fullName.trim().replace(/\s+/g, ' ');
+
+	// Dividir en partes
+	const parts = normalized.split(' ');
+
+	// Caso 1: Solo nombre y apellido
+	if (parts.length === 2) {
+		return {
+			first_name: parts[0],
+			last_name: parts[1],
+		};
+	}
+
+	// Caso 2: Dos nombres y dos apellidos
+	if (parts.length === 4) {
+		return {
+			first_name: `${parts[0]} ${parts[1]}`,
+			last_name: `${parts[2]} ${parts[3]}`,
+		};
+	}
+
+	// Caso 3: Dos nombres y un apellido
+	if (parts.length === 3) {
+		return {
+			first_name: `${parts[0]} ${parts[1]}`,
+			last_name: parts[2],
+		};
+	}
+
+	// Caso por defecto (cualquier otra combinación)
+	return {
+		first_name: parts[0],
+		last_name: parts.slice(1).join(' ') || 'Sin apellido',
+	};
+}
 
 async function authenticateUser(email: string, password: string) {
 	try {
@@ -47,7 +90,7 @@ async function authenticateUser(email: string, password: string) {
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	session: { strategy: 'jwt' },
 	providers: [
-		GitHub,
+		GitHub({}),
 		Credentials({
 			authorize: async (credentials) => {
 				if (!credentials?.email || !credentials?.password) {
@@ -65,6 +108,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		}),
 	],
 	callbacks: {
+		async signIn({ user, account, profile }) {
+			console.log('signIn callback triggered');
+			console.log('Provider:', account?.provider);
+
+			if (account?.provider === 'github') {
+				console.log(profile);
+				const { first_name, last_name } = parseName(
+					(profile?.name as string) || (profile?.login as string) || 'Usuario'
+				);
+
+				const { rows } = await query(insertUserSQL, [
+					first_name,
+					last_name,
+					profile?.email,
+					'',
+				]);
+			}
+
+			return true;
+		},
 		async jwt({ token, user }) {
 			if (user) {
 				try {
@@ -74,6 +137,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 					token.id = user.id;
 					token.email = user.email;
 					token.roles = resultRoles.rows || []; // Default to an empty array if no roles are returned
+
+					const { first_name, last_name } = parseName(
+						(user.name as string) || ''
+					);
+
+					token.firstName = first_name;
+					token.lastName = last_name;
 				} catch (error) {
 					console.error('Error fetching user roles:', error);
 					token.roles = []; // Ensure token.roles is always defined
@@ -82,9 +152,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			return token;
 		},
 		async session({ session, token }) {
+			console.log(session);
 			session.user = {
 				id: token.id as string,
-				name: session.user.name,
+				firstName: token.firstName as string,
+				lastName: token.lastName as string,
 				email: token.email as string,
 				emailVerified: token.emailVerified
 					? new Date(token.emailVerified as string)

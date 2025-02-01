@@ -60,6 +60,7 @@ export const ProfileForm = ({
 							className="grow"
 							value={formData.email}
 							onChange={onChange}
+							readOnly
 						/>
 					</label>
 				</div>

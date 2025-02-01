@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 
 interface RegisterCredentials {
-	name: string;
+	firstName: string;
+	lastName: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
@@ -10,7 +11,8 @@ interface RegisterCredentials {
 
 interface RegisterFormProps {
 	handleRegister: (
-		name: string,
+		firstName: string,
+		lastName: string,
 		email: string,
 		password: string,
 		confirmPassword: string
@@ -25,7 +27,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 	error,
 }) => {
 	const [credentials, setCredentials] = useState<RegisterCredentials>({
-		name: '',
+		firstName: '',
+		lastName: '',
 		email: '',
 		password: '',
 		confirmPassword: '',
@@ -46,7 +49,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 		// 	return;
 		// }
 		await handleRegister(
-			credentials.name,
+			credentials.firstName,
+			credentials.lastName,
 			credentials.email,
 			credentials.password,
 			credentials.confirmPassword
@@ -71,10 +75,24 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 							</label>
 							<input
 								type="text"
-								name="name"
+								name="firstName"
 								placeholder="Ingresa tu nombre"
 								className="input input-bordered w-full"
-								value={credentials.name}
+								value={credentials.firstName}
+								onChange={handleChange}
+								required
+							/>
+						</div>
+						<div className="form-control w-full">
+							<label className="label">
+								<span className="label-text">Nombre</span>
+							</label>
+							<input
+								type="text"
+								name="lastName"
+								placeholder="Ingresa tu apellido"
+								className="input input-bordered w-full"
+								value={credentials.lastName}
 								onChange={handleChange}
 								required
 							/>
