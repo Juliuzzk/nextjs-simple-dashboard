@@ -34,7 +34,10 @@ export default function RootLayout({
 				<AuthProvider>
 					<ThemeProvider>
 						{' '}
-						<SessionProvider>{children}</SessionProvider>
+						<SessionProvider>
+							{/* <Toaster position="top-right" /> */}
+							{children}
+						</SessionProvider>
 					</ThemeProvider>
 				</AuthProvider>
 			</body>

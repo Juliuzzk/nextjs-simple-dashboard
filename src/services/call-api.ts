@@ -41,6 +41,6 @@ function processErrors<T>(
 
 	return {
 		success: false,
-		error: response.error || 'An unknown error occurred',
+		error: response.error || response.message || 'An unknown error occurred',
 	};
 }

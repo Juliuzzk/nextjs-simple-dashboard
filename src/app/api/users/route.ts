@@ -4,6 +4,7 @@ import { loadQuery } from '@/lib/database/load-query';
 import { getLanguage } from '@/lib/get-lenguaje';
 import { updateUserProfileSchema } from '@/lib/schema/update-user-profile-schema';
 import { translateZodErrors } from '@/lib/zod-utils';
+import { User } from '@/types/user';
 import logger from '@/utils/logger';
 import { createResponse } from '@/utils/response';
 import { NextResponse } from 'next/server';
@@ -15,10 +16,31 @@ const updateUserSQL = loadQuery('src/app/api/users/sql/updateUser.sql');
 export async function GET() {
 	try {
 		const users = await query(getAllUsersSQL, []);
+		const procesedUsers: User[] = [];
+
+		if (users.rows.length > 0) {
+			users.rows.forEach((row: any) => {
+				const user: User = {
+					id: row.id,
+					firstName: row.first_name,
+					lastName: row.last_name,
+					email: row.email,
+					emailVerified: row.email_verified,
+					image: row.image,
+					createdAt: row.created_at,
+					lastLogin: row.last_login,
+					phoneNumber: row.phone_number,
+					address: row.address,
+					bio: row.bio,
+					status: row.status,
+				};
+				procesedUsers.push(user);
+			});
+		}
 
 		return NextResponse.json(
 			createResponse(true, {
-				data: users.rows,
+				data: procesedUsers,
 				message: 'OK',
 			}),
 			{ status: 200 }
@@ -45,6 +67,7 @@ export async function POST(req: Request) {
 		const { id, updates } = updateUserProfileSchema.parse(body);
 
 		console.log(id, updates);
+
 		const response = await query(updateUserSQL, [
 			id,
 			updates.first_name,
@@ -54,8 +77,6 @@ export async function POST(req: Request) {
 			updates.bio,
 		]);
 
-		console.log(response);
-
 		return NextResponse.json(
 			createResponse(true, {
 				message: 'User updated successfully',
@@ -63,6 +84,7 @@ export async function POST(req: Request) {
 			{ status: 200 }
 		);
 	} catch (error: unknown) {
+		console.log('Errores..');
 		const language = getLanguage(req.headers) || 'en';
 
 		if (error instanceof z.ZodError) {

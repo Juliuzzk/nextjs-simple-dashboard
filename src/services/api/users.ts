@@ -1,5 +1,5 @@
 import { User } from '@/types/user';
-import { callApi } from '@/utils/call-api';
+import { callApi } from '@/services/call-api';
 
 const API_BASE_URL = '/api/users';
 
@@ -8,7 +8,7 @@ export async function fetchAllUsers() {
 }
 
 export async function fetchUserById(id: string) {
-	return callApi(`${API_BASE_URL}/${id}`);
+	return callApi<User>(`${API_BASE_URL}/${id}`);
 }
 
 export async function updateUser(user: User) {
@@ -24,8 +24,6 @@ export async function updateUser(user: User) {
 			bio: user.bio,
 		},
 	};
-
-	console.log(userData);
 
 	return callApi(`${API_BASE_URL}`, {
 		method: 'POST',

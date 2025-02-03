@@ -15,7 +15,7 @@ const eslintConfig = [
 		files: ['**/*.ts', '**/*.tsx'], // Aplica a TypeScript
 		rules: {
 			'@typescript-eslint/no-explicit-any': 1, // Cambiar error a advertencia
-			'@typescript-eslint/no-unused-vars': 1, // Cambiar error a advertencia
+			'@typescript-eslint/no-unused-vars': 0, // Cambiar error a advertencia
 			'prefer-const': 1,
 		},
 	},

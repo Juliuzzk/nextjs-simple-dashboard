@@ -2,16 +2,14 @@
 
 import { ProfileForm } from '@/components/dashboard/profile/ProfileForm';
 import { ProfileImageCard } from '@/components/dashboard/profile/ProfileImageCard';
-import { fetchUserById, updateUser } from '@/services/api/users';
+import { fetchUserById } from '@/services/api/users';
 import { User } from '@/types/user';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 
 export default function ProfilePage() {
 	const { data: session, status } = useSession();
 
-	// Estado para el formulario (valores editables)
 	const [formData, setFormData] = useState({
 		firstName: '',
 		lastName: '',
@@ -19,12 +17,6 @@ export default function ProfilePage() {
 		phone: '',
 		address: '',
 		bio: '',
-	});
-
-	// Estado para los datos guardados en la base de datos (valores confirmados)
-	const [savedData, setSavedData] = useState({
-		firstName: '',
-		lastName: '',
 	});
 
 	useEffect(() => {
@@ -42,17 +34,21 @@ export default function ProfilePage() {
 						address: user.address || '',
 						bio: user.bio || '',
 					});
-					// También guardamos los valores confirmados
-					setSavedData({
-						firstName: user.firstName || '',
-						lastName: user.lastName || '',
-					});
 				}
 			});
 		}
 	}, [session, status]);
 
 	// Validar la autenticación después de los Hooks
+	if (status === 'unauthenticated') {
+		// Redirigir o mostrar un mensaje de error
+		return <p>You must be logged in to access this page.</p>;
+	}
+
+	if (status === 'loading') {
+		// Mostrar un spinner o mensaje de carga
+		return <p>Loading...</p>;
+	}
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -61,32 +57,26 @@ export default function ProfilePage() {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		console.log('Form data:', formData);
 
 		try {
 			// Asumimos que el usuario está autenticado (ya validamos al principio)
 			const userData: User = {
-				id: Number(session!.user!.id), // Usamos el operador "!" porque sabemos que session.user.id existe
+				id: session!.user!.id, // Usamos el operador "!" porque sabemos que session.user.id existe
 				firstName: formData.firstName,
 				lastName: formData.lastName,
 				email: formData.email,
 				phoneNumber: formData.phone,
 				address: formData.address,
 				bio: formData.bio,
-				status: '',
 			};
 
 			const response = await updateUser(userData);
 
 			if (response.success) {
 				console.log('User updated successfully:', response.data);
-				// Actualizamos los valores confirmados
-				setSavedData({
-					firstName: formData.firstName,
-					lastName: formData.lastName,
-				});
 				toast.success('Profile updated successfully!');
 			} else {
 				console.error('Error updating user:', response.error);
@@ -94,7 +84,7 @@ export default function ProfilePage() {
 			}
 		} catch (error) {
 			console.error('Error in handleSubmit:', error);
-			toast.error('An unexpected error occurred.');
+			toast.error('An unexpected error occurred. Please try again.');
 		}
 	};
 
@@ -110,9 +100,10 @@ export default function ProfilePage() {
 
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 				<ProfileImageCard
-					firstName={savedData.firstName} // Solo muestra los valores confirmados
-					lastName={savedData.lastName} // Solo muestra los valores confirmados
+					firstName={formData.firstName}
+					lastName={formData.lastName}
 					avatarUrl="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+					// onChangePhoto={handleChangePhoto}
 				/>
 				<div className="lg:col-span-2 card bg-base-200 shadow-xl">
 					<ProfileForm
