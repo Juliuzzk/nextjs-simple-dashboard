@@ -20,14 +20,19 @@ export async function updateUser(user: User) {
 			first_name: user.firstName,
 			last_name: user.lastName,
 			phone_number: user.phoneNumber,
+			image: user.image,
 			address: user.address,
 			bio: user.bio,
 		},
 	};
 
-	return callApi(`${API_BASE_URL}`, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(userData),
-	});
+	return callApi(
+		`${API_BASE_URL}`,
+		{
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(userData),
+		},
+		'all'
+	);
 }

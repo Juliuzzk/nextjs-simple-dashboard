@@ -64,6 +64,7 @@ export async function GET() {
 export async function POST(req: Request) {
 	try {
 		const body = await req.json();
+		console.log(body);
 		const { id, updates } = updateUserProfileSchema.parse(body);
 
 		console.log(id, updates);
@@ -75,6 +76,7 @@ export async function POST(req: Request) {
 			updates.phone_number,
 			updates.address,
 			updates.bio,
+			updates.image,
 		]);
 
 		return NextResponse.json(

@@ -4,7 +4,7 @@ import { TopNav } from '@/components/dashboard/navigation/navbar/TopNav';
 import { Sidebar } from '@/components/dashboard/navigation/sidebar/Sidebar';
 import { CustomLoader } from '@/components/shared/Loader';
 import { useAuthenticatedSession } from '@/hooks/useAuthenticatedSession'; // Importa el hook personalizado
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import '../globals.css';
 import { Session } from 'next-auth';
@@ -16,7 +16,8 @@ export default function DashboardLayout({
 }>) {
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	// Usar el hook personalizado para manejar la sesión
-	const { status, session } = useAuthenticatedSession();
+	// const { status, session } = useAuthenticatedSession();
+	const { data: session, status, update } = useSession();
 	const user = session?.user as Session['user'];
 
 	const onLogout = async () => {

@@ -4,19 +4,20 @@ import { z } from 'zod';
 const updatesSchema = z.object({
 	first_name: z
 		.string()
-		.min(1, 'First name is required')
-		.max(50, 'First name is too long'),
+		.min(1, 'FIRST_NAME_REQUIRED')
+		.max(50, 'FIRST_NAME_TOO_LONG'),
 	last_name: z
 		.string()
-		.min(1, 'Last name is required')
-		.max(50, 'Last name is too long'),
+		.min(1, 'LAST_NAME_REQUIRED')
+		.max(50, 'LAST_NAME_TOO_LONG'),
 	phone_number: z
 		.string()
-		.min(10, 'Phone number must be at least 10 digits')
-		.max(15, 'Phone number is too long')
+		.max(15, 'PHONE_NUMBER_TOO_LONG')
+		.min(10, 'PHONE_NUMBER_TOO_SHORT')
 		.optional(),
-	address: z.string().max(100, 'Address is too long').optional(),
-	bio: z.string().max(500, 'Bio is too long').optional(),
+	image: z.string(),
+	address: z.string().max(100, 'ADDRESS_TOO_LONG').optional(),
+	bio: z.string().max(500, 'BIO_TOO_LONG').optional(),
 });
 
 // Esquema para el cuerpo completo de la solicitud

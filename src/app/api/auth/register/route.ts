@@ -60,7 +60,7 @@ export async function POST(req: Request) {
 			{ status: 201 }
 		);
 	} catch (error) {
-		logger.error('api/auth/register/route.ts', { error });
+		logger.error('api/auth/register/route.ts');
 
 		const language = getLanguage(req.headers) || 'en';
 

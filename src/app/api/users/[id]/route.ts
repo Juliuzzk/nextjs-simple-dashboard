@@ -27,6 +27,7 @@ export async function GET(
 			);
 		}
 
+		console.log('probando', user.rows);
 		if (user.rows.length > 0) {
 			foundUser = {
 				id: user.rows[0].id,

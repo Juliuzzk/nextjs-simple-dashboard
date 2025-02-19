@@ -35,7 +35,7 @@ function processErrors<T>(
 		);
 		return {
 			success: false,
-			error: mode === 'single' ? errorMessages[0] : errorMessages.join(', '),
+			error: mode === 'single' ? errorMessages[0] : errorMessages,
 		};
 	}
 

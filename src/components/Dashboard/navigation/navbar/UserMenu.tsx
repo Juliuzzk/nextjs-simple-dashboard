@@ -15,10 +15,22 @@ export function UserMenu({ user }: UserMenuProps) {
 				className="btn btn-ghost btn-circle avatar"
 			>
 				<div className="w-10 rounded-full">
-					<img
-						alt="User avatar"
-						src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&q=80"
-					/>
+					{user.image ? (
+						<Image
+							src={user.image}
+							alt="User Avatar"
+							width={20}
+							height={20}
+							className="w-full h-full object-cover rounded-full"
+						/>
+					) : (
+						<Image
+							alt="User avatar"
+							width={20}
+							height={20}
+							src="/images/default-avatar.jpg"
+						/>
+					)}
 				</div>
 			</div>
 			<ul
